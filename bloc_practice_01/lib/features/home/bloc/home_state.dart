@@ -10,20 +10,26 @@ sealed class HomeState extends Equatable {
 abstract class HomeActionState extends HomeState {}
 //HomeActionState for (newly added) - this is newly created for "Action State"
 
-final class HomeInitial extends HomeState {} //const
+final class HomeInitial extends HomeState {} // (***const***)
 
-class HomeLoadingState extends HomeState {} // added
+class HomeLoadingState extends HomeState {}
+//for loading state (Circular Bar - to load data)
 
 class HomeLoadedSuccessState extends HomeState {
+  //1st simple state added - this is for the fetched data to show on screen
   final List<HomeProductDataModel> products;
 
   const HomeLoadedSuccessState({required this.products});
-} //added
+}
 
-class HomeErrorState extends HomeState {} //added
+class HomeErrorState extends HomeState {}
+// Error state should be simple state since it's for building the UI only
+// or showing  a message on the screen
 
 class HomeNavigateToWishlistPageActionState extends HomeActionState {}
-//added  Action state
+//HomeNavigateToWishlistPageActionState should extends HomeActionState.
+//Since it will be "routed" to other screen/page
 
 class HomeNavigateToCartPageActionState extends HomeActionState {}
-//added Action state
+//HomeNavigateToCartPageActionState should extends HomeActionState.
+//Since it will be "routed" to other screen/page

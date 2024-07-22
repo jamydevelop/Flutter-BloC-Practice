@@ -19,10 +19,15 @@ class _HomeState extends State<Home> {
   }
 
   final HomeBloc homeBloc = HomeBloc();
+  //Instance of class "HomeBloc"
+  //This will pass the BloC in order to use it inside BlocConsumer
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<HomeBloc, HomeState>(
       bloc: homeBloc,
+      //(bloc: is parameter from BlocConsumer)
+
       listenWhen: (previous, current) => current is HomeActionState,
       buildWhen: (previous, current) => current is! HomeActionState,
       listener: (context, state) {
@@ -34,7 +39,9 @@ class _HomeState extends State<Home> {
               MaterialPageRoute(builder: (context) => const Wishlist()));
         }
       },
+
       builder: (context, state) {
+        //builder: is auto generated from BlocConsumer
         switch (state.runtimeType) {
           // ignore: type_literal_in_constant_pattern
           case HomeLoadingState:
@@ -46,6 +53,8 @@ class _HomeState extends State<Home> {
           // ignore: type_literal_in_constant_pattern
           case HomeLoadedSuccessState:
             return Scaffold(
+              //Scaffold should be wrap with BlocConsumer in order to listen to
+              //listen to the Events and States of the BloC
               appBar: AppBar(
                 backgroundColor: Colors.teal,
                 centerTitle: true,
